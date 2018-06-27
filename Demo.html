@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+<meta charset="utf-8" />
+<head>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("button").click(function () {
+               // $.getJSON("http://222.186.36.75:8080/record/record/getAllRecords?atype=image",function (data,status) {
+               //     for(i=0;i<data.data.length;i++){
+               //      $("#p11").append(data.data[i].netpath+"\n");
+               //     }
+               // });
+
+                // $.ajax({
+                //     url:'http://222.186.36.75:8080/record/record/getAllRecords?atype=image',
+                //     type:'get',
+                //     dataType:'json',
+                //     success:function (data) {
+                //              for(i=0;i<data.data.length;i++){
+                //               $("#p11").append(data.data[i].netpath+"\n");
+                //              }
+                //     }
+                // });
+
+                record  = new Object();
+                record.locpath = "/storage/emulated/0/IMGA/1463130859728.jpg";
+                d = new Object();
+                d.data = JSON.stringify(record);
+
+                $.ajax({
+                    url:'http://222.186.36.75:8080/record/record/isRecordUploaded',
+                    type:'post',
+                    dataType:'json',
+                    data:d,
+                    contentType:'application/x-www-form-urlencoded',
+                    success:function (data) {
+                        $("#p11").append(data.isException+data.errorCode+data.errorMessage+"\n");
+                    }
+                });
+
+                // $.post("http://222.186.36.75:8080/record/record/isRecordUploaded","123456",function (data, status) {
+                //     $("#p11").append(data+"\n");
+                // });
+            });
+        });
+    </script>
+</head>
+
+<body>
+<p>演示带有不同参数的 fadeIn() 方法。</p>
+<button id="button">点击这里，使三个矩形淡入</button>
+<br><br>
+<div id="div1" style="width:80px;height:80px;display:block;background-color:red;position: absolute;"></div>
+<br>
+<div id="div2" style="width:80px;height:80px;display:block;background-color:green;"></div>
+<br>
+<div id="div3" style="width:80px;height:80px;display:block;background-color:blue;"></div>
+
+<div id="div4" style="width: 80px;height: 80px;display: block;background-color: green">122</div>
+
+<p id="p11"></p>
+</body>
+</html>
